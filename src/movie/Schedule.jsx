@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 
 export default function Schedule({
@@ -66,9 +67,13 @@ export default function Schedule({
                                 hour12: false,
                               })
                               return (
-                                <a key={schedule.maLichChieu} href={`/datve/${schedule.maLichChieu}`} className="btn btn-outline-success btn-sm">
+                                <Link
+                                  key={schedule.maLichChieu}
+                                  to={`/datve/${schedule.maLichChieu}`}
+                                  className="btn btn-outline-success btn-sm"
+                                >
                                   {time}
-                                </a>
+                                </Link>
                               );
                             })}
                           </div>
