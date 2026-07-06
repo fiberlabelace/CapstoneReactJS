@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { carouselIMG } from './sourceAPI/carousel.js';
 import { movieIMG } from './sourceAPI/movie.js';
 import { scheduleIMG } from './sourceAPI/schedule.js';
-import Schedule from './schedule.jsx';
+import Schedule from './Schedule.jsx';
 import './styles/main.scss';
 
 export default function Movie() {
