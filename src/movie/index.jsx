@@ -12,9 +12,10 @@ export default function Movie() {
   const [listPhim, setListPhim] = useState([]);
   const [listSchedule, setListSchedule] = useState([]);
   const [rapPhim, setRapPhim] = useState('');
-  const [currentUserName, setCurrentUserName] = useState('');
+  const [currentUserName, setCurrentUserName] = useState(() => localStorage.getItem('currentUserName') || '');
   const handleLogout = () => {
     localStorage.removeItem('currentUserName');
+    setCurrentUserName('');
     window.location.reload();
   };
 
@@ -23,6 +24,9 @@ export default function Movie() {
 
 
 useEffect(() => {
+  const storedUserName = localStorage.getItem('currentUserName') || '';
+  setCurrentUserName(storedUserName);
+
   const loadData = async () => {
     try {
       const [carouselRes, movieRes, scheduleRes] = await Promise.all([
