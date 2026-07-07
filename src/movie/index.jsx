@@ -108,40 +108,81 @@ useEffect(() => {
 
 
       <main>
-        <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
+        <div id="carouselExampleAutoplaying" className="carousel slide shadow" data-bs-ride="carousel">
           <div className="carousel-inner">
-            {banner.map((banner, index) => (
-              <div  key={banner.maBanner} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
-                <img src={banner.hinhAnh} className="d-block w-100" style={{ maxHeight: '600px', objectFit: 'cover' }}  alt={`Banner ${banner.maPhim}`}/>
+            {banner.map((item, index) => (
+              <div key={item.maBanner} className={`carousel-item ${index === 0 ? "active" : ""}`}>
+                <img src={item.hinhAnh} className="d-block w-100"
+                  style={{
+                    maxHeight: "600px",
+                    objectFit: "cover",
+                  }}
+                  alt={item.maPhim}
+                />
               </div>
             ))}
           </div>
           <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-            <span className="carousel-control-prev-icon" aria-hidden="true" />
-            <span className="visually-hidden">Previous</span>
+            <span className="carousel-control-prev-icon"></span>
           </button>
           <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-            <span className="carousel-control-next-icon" aria-hidden="true" />
-            <span className="visually-hidden">Next</span>
+            <span className="carousel-control-next-icon"></span>
           </button>
         </div>
-        <h1 className="text-center my-5">Danh sách phim</h1>
-        <div className="container my-3">
-          <div className="row">
+        <div className="container py-5">
+          <h2 className="text-center fw-bold mb-4">
+            Danh sách phim
+          </h2>
+          <div className="row g-4 justify-content-center">
             {listPhim.map((phim) => (
-              <div key={phim.maPhim} className="col-12 col-md-3 col-lg-2" style={{ cursor: 'pointer' }}
-                onClick={() => {
-                  localStorage.setItem('selectedMovie', JSON.stringify(phim));
-                  navigate(`/detail/${phim.maPhim}`);
-                }}>
-                <img src={phim.hinhAnh} width="200px" height="250px" style={{ objectFit: 'cover' }} alt={phim.tenPhim} />
-                <h4 className="fs-6 text-center">{phim.tenPhim}</h4>
+              <div key={phim.maPhim} className="col-6 col-sm-4 col-md-3 col-lg-2">
+                <div
+                  className="card h-100 shadow-sm"
+                  style={{
+                    cursor: "pointer",
+                    transition: "0.3s"
+                  }}
+                  onClick={() => {
+                    localStorage.setItem(
+                      "selectedMovie",
+                      JSON.stringify(phim)
+                    );
+                    navigate(`/detail/${phim.maPhim}`);
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "translateY(-5px)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "translateY(0)";
+                  }}
+                >
+                  <img src={phim.hinhAnh} className="card-img-top" style={{ height: "260px", objectFit: "cover"}}alt={phim.tenPhim}/>
+                  <div className="card-body">
+                    <h6 className="text-center">{phim.tenPhim}</h6>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </div>
-        <h1 className="text-center my-5 fw-bold text-uppercase">Lịch chiếu hệ thống</h1>
-        <Schedule listSchedule={listSchedule} activeCinemaSystem={rapPhim}  setActiveCinemaSystem={setRapPhim}/>
+
+        {/* Schedule */}
+        <div className="container py-5">
+
+          <h2 className="text-center fw-bold mb-4 text-uppercase">
+            Lịch chiếu hệ thống
+          </h2>
+
+          <div className="shadow rounded p-3 bg-white">
+            <Schedule
+              listSchedule={listSchedule}
+              activeCinemaSystem={rapPhim}
+              setActiveCinemaSystem={setRapPhim}
+            />
+          </div>
+
+        </div>
+
       </main>
 
 
